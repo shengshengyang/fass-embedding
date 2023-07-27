@@ -1,0 +1,9 @@
+# created by virtualenv automatically
+.idea
+Lib
+Scripts
+share
+etc
+index.faiss
+title_vectors.npy
+pyvenv.cfg
