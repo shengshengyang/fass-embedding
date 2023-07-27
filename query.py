@@ -7,11 +7,11 @@ import os
 from dotenv import load_dotenv
 
 # Read data from phone.xlsx
-data = pd.read_excel('embed_query/phone2.xlsx')
+data = pd.read_excel('phone2.xlsx')
 
 # Load the Faiss index and title vectors from files
-index = faiss.read_index('embed_query/index.faiss')
-title_vectors = np.load('embed_query/title_vectors.npy')
+index = faiss.read_index('index.faiss')
+title_vectors = np.load('title_vectors.npy')
 
 # Set up Streamlit app
 st.title("大豐智慧分機表")
@@ -37,7 +37,7 @@ if query:
     # Retrieve the matched content
     matched_data = data.iloc[indices[0]]
 
-    st.subheader("Matched Contents:")
+    st.subheader("最符合您問題的五位員工:")
     for i, row in matched_data.iterrows():
         html = """
         <div style="border:1px solid #000; margin:10px; padding:10px;">

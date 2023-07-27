@@ -24,12 +24,19 @@ Ensure you have the following installed on your machine:
     pip install faiss-gpu
     ```
 ### Configuration
-Input your OpenAI API key into the .env file:
+Input your OpenAI API key into the <span style="color:green"> .env</span> file:
 ```
 OPENAI_KEY=<YOUR_API_KEY>
 ```
-Input your data into the phone2.xlsx file.
+Input your data into the  <span style="color:green"> phone2.xlsx</span> file.
 
 ### Data Columns
 - title: This column should contain the data you want to transform into vectors using the OpenAI API embedding.
 - other columns: The system will find the closest result of each column. You can modify the rows as needed to generate your own template.
+
+### Usage
+1. run the <span style="color:green"> OpenAiEmbedding.py</span>,it would create the index.faiss and title_vectors.npy
+2. run the script , it would run the app on local
+   ```commandline
+   streamlit run query.py
+```
