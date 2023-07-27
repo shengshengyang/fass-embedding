@@ -9,7 +9,6 @@ scipy
 nltk
 sentencepiece
 huggingface-hub
-sentence_transformers
 streamlit
 sympy
 requests
@@ -18,3 +17,4 @@ pandas
 faiss-cpu
 os
 python-dotenv
+matplotlib
