@@ -1,19 +1,15 @@
 import pandas as pd
 import requests
-from sentence_transformers import SentenceTransformer
 import faiss
 import numpy as np
 import os
 from dotenv import load_dotenv
 
 
-def clean_and_reinput(data_path, model_path, index_path, vectors_path):
+def clean_and_reinput(data_path, index_path, vectors_path):
     try:
         # Read data from Excel file
         data = pd.read_excel(data_path)
-
-        # Initialize SentenceTransformer model
-        model = SentenceTransformer(model_path)
 
         # Vectorize the titles
         title_vectors = []
@@ -67,9 +63,8 @@ def clean_and_reinput(data_path, model_path, index_path, vectors_path):
 # Example usage
 load_dotenv()
 data_path = 'phone2.xlsx'
-model_path = 'paraphrase-multilingual-mpnet-base-v2'
 index_path = 'index.faiss'
 vectors_path = 'title_vectors.npy'
 api_key = os.getenv("OPENAI_KEY")
 
-clean_and_reinput(data_path, model_path, index_path, vectors_path)
+clean_and_reinput(data_path, index_path, vectors_path)

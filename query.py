@@ -37,8 +37,12 @@ if query:
     # Retrieve the matched content
     matched_data = data.iloc[indices[0]]
 
+    def replace_none_with_na(value):
+        return '無' if pd.isnull(value) else value
+
     st.subheader("最符合您問題的五位員工:")
     for i, row in matched_data.iterrows():
+        row = row.apply(replace_none_with_na)
         html = """
         <div style="border:1px solid #000; margin:10px; padding:10px;">
             <h5>部門: {dept}</h5>
@@ -49,6 +53,6 @@ if query:
             <p>手機簡碼65+分機3碼: {easyCode}</p>
             <p>信箱: {email}</p>
         </div>
-        """.format(index=i + 1, dept=row['dept'], name=row['name'], ext=row['ext'], privatePhone=row['privatePhone'],
+        """.format(dept=row['dept'], name=row['name'], ext=row['ext'], privatePhone=row['privatePhone'],
                    publicPhone=row['publicPhone'], easyCode=row['easyCode'], email=row['email'])
         st.markdown(html, unsafe_allow_html=True)
