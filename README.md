@@ -39,4 +39,4 @@ Input your data into the  <span style="color:green"> phone2.xlsx</span> file.
 2. run the script , it would run the app on local
    ```commandline
    streamlit run query.py
-```
+   ```
