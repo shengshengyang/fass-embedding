@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib
 from matplotlib.font_manager import FontProperties
-matplotlib.rcParams['axes.unicode_minus'] = False  # Solve the problem that minus sign '-' is displayed as a square
 
+matplotlib.rcParams['axes.unicode_minus'] = False  # Solve the problem that minus sign '-' is displayed as a square
 
 # Load the title vectors
 title_vectors = np.load('title_vectors.npy')
@@ -28,6 +28,8 @@ font = FontProperties(fname=r"c:\windows\fonts\simsun.ttc", size=14)
 
 # Use the font properties in the annotate function
 for i, title in enumerate(data['title']):
+    if i >= len(title_vectors):
+        break
     ax.text(title_vectors[i, 0], title_vectors[i, 1], title_vectors[i, 2], title, fontproperties=font)
 
 # Show the plot using Streamlit

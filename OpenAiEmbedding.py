@@ -1,12 +1,23 @@
+import os
 import pandas as pd
 import requests
 import faiss
 import numpy as np
-import os
 from dotenv import load_dotenv
 
-
 def clean_and_reinput(data_path, index_path, vectors_path):
+    # Delete existing index and vectors files if they exist
+    if os.path.exists(index_path):
+        os.remove(index_path)
+    if os.path.exists(vectors_path):
+        os.remove(vectors_path)
+
+    print("clean all the index and data")
+
+    # Initialize index and title_vectors to None
+    index = None
+    title_vectors = None
+
     try:
         # Read data from Excel file
         data = pd.read_excel(data_path)
@@ -59,6 +70,8 @@ def clean_and_reinput(data_path, index_path, vectors_path):
     except Exception as e:
         print("Error occurred during data cleaning and re-input:", str(e))
 
+    return index, title_vectors
+
 
 # Example usage
 load_dotenv()
@@ -67,4 +80,4 @@ index_path = 'index.faiss'
 vectors_path = 'title_vectors.npy'
 api_key = os.getenv("OPENAI_KEY")
 
-clean_and_reinput(data_path, index_path, vectors_path)
+index, title_vectors = clean_and_reinput(data_path, index_path, vectors_path)
