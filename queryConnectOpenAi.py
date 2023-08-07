@@ -6,6 +6,7 @@ import streamlit as st
 import os
 import json
 from dotenv import load_dotenv
+import time
 # Set the page to wide layout
 st.set_page_config(layout="wide")
 # Read data from phone.xlsx
@@ -92,14 +93,34 @@ if query:
             "n": 1
         }
     )
-    col2.subheader("GPT生成回復:")
-    # Check if 'choices' key exists in the response
+    col2.subheader("GPT生成回覆:")
+    # Initialize chat history
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+
     if 'choices' in response.json():
         # Extract the generated response
         generated_response = response.json()["choices"][0]["message"]["content"]
 
         # Print the generated response
         print(generated_response)
-        col2.write(generated_response)
+        # Display chat messages from history on app rerun
+        for message in st.session_state.messages:
+            with st.chat_message(message["role"]):
+                st.markdown(message["content"])
+
+        with col2.chat_message("assistant"):
+            message_placeholder = st.empty()
+            full_response = ""
+
+        # Simulate stream of response with milliseconds delay
+        for chunk in generated_response.split():
+            full_response += chunk + " "
+            time.sleep(0.05)
+            # Add a blinking cursor to simulate typing
+            message_placeholder.markdown(full_response + "▌")
+        message_placeholder.markdown(full_response)
+        # Add assistant response to chat history
+        st.session_state.messages.append({"role": "assistant", "content": full_response})
     else:
         print("No response choices found.")
