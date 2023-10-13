@@ -26,7 +26,7 @@ def clean_and_reinput(data_path, index_path, vectors_path):
         title_vectors = []
         for _, row in data.iterrows():
             # Get the title text
-            title = row['title']
+            title = row['question']
 
             # Prepare the request payload
             payload = {
@@ -75,7 +75,7 @@ def clean_and_reinput(data_path, index_path, vectors_path):
 
 # Example usage
 load_dotenv()
-data_path = 'phone2.xlsx'
+data_path = 'phone1.xlsx'
 index_path = 'index.faiss'
 vectors_path = 'title_vectors.npy'
 api_key = os.getenv("OPENAI_KEY")

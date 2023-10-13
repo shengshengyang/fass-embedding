@@ -17,3 +17,6 @@ pandas~=2.0.3
 faiss-cpu
 python-dotenv~=1.0.0
 matplotlib~=3.7.2
+requests_ntlm
+Office365-REST-Python-Client
+openai

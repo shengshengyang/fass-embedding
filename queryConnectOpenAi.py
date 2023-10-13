@@ -18,16 +18,19 @@ index = faiss.read_index('index.faiss')
 title_vectors = np.load('title_vectors.npy')
 
 # Set up Streamlit app
-st.title("大豐智慧分機表")
+st.markdown("<h1 style='text-align: center; color: black;'>大豐智慧分機表</h1>", unsafe_allow_html=True)
 # Create two columns
 col1, col2 = st.columns(2)
-query = col2.text_input("請輸入您的問題，將為您找到合適的人:")
 load_dotenv()
 # Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
+# Create a placeholder for "GPT生成回覆" section
+gpt_placeholder = col2.empty()
+query = col2.text_input("請輸入您的問題，將為您找到合適的人:")
+col2.subheader("GPT生成回覆:")
+col1.subheader("最符合您問題的五位員工:")
 if query:
-    col2.subheader("GPT生成回覆:")
     # Display chat messages from history on app rerun
     for message in st.session_state.messages:
         with col2.chat_message(message["role"]):
@@ -61,7 +64,7 @@ if query:
         # Create two columns
 
 
-    col1.subheader("最符合您問題的五位員工:")
+
     for i, row in matched_data.iterrows():
         row = row.apply(replace_none_with_na)
         html = """
